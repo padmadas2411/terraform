@@ -1,0 +1,68 @@
+From 3db6a3db001354c6ffc758c6dc98c6c3c5a82598 Mon Sep 17 00:00:00 2001
+From: EC2 Default User <ec2-user@ip-172-31-0-28.ap-south-1.compute.internal>
+Date: Wed, 7 Jul 2021 12:16:50 +0000
+Subject: [PATCH] policy
+
+---
+ .iam.tf.swp | Bin 0 -> 12288 bytes
+ iam.tf      |  22 ++++++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+ create mode 100644 .iam.tf.swp
+
+diff --git a/.iam.tf.swp b/.iam.tf.swp
+new file mode 100644
+index 0000000000000000000000000000000000000000..e17815b31e260e983ef52e0c42a82ab3e1693fa9
+GIT binary patch
+literal 12288
+zcmeI2y>AmS7>8XJ20m59ZcJf_xXVWes;Uef0*VA`Y1A&LO5Ka2p13caot6-#ASMPF
+znEBX23>5<t8zb;%bV34&zkr|9yQBfqsvDJFOHVFmzkY2$c84lnFRj$>@ENzvP|h<}
+ze6hRs>PeM7J;RvtDo$Ig)HWSd{KP3=uQ=0Xr{q*-T$wmJZkr9K?0RvSw2gB8$RN#j
+zp0H??HpMtmsWg5ZX-8_Uv<_8dioOh8(>iE4Y9j+=;HU=Lrsd3>S)Q(xOSbD}afx4;
+zTs~?RiYEhPfDDiUGC&5%02v?yWZ)PZFv$dag!!My)=<cv6MsCjS9*{EGC&5%02v?y
+zWPl8i0Wv@a$N(821IN&SY%;cXim|EFm^^;}&;S4bc8;+f@Ekk?_dy+0K>?fu-_J7k
+z8N39WU;$hKli(Nb5BvmQz#H%yJO<mq154mGD1eLL2gct8U%@Bv5qtnU;5~Q;-hvLO
+zfvccD=VR!crc4IN02v?yWPl8i0Wv@a{$~R{#(5eCir?UJOE+*sw_#u1P<k7Fq})h`
+z3L*B<NK)1EA0Sdpb%WTGfvY>(sIXyMdyXGzBO^}<mMUBlPCdm%o-=Plj=1FqN^p^l
+zAb6Lt9;+_g#3$#gfOGrJ7E$+`VwMZR`mbD6TP@`oTQwg9@s_xjHT3c?wvS3TeM|#E
+zxRmV5P(F+!OvK(;9wb^!{mAnZ86d2iXP@`%m1Wye8$CO(bvsl`u#pX8<3!y^EE%_%
+z5q8g3tf*9Hy(*=0#VMC?V;VhdH10klMc-&6i38v3z~0=PT`XFywy`!dJ&xUte;Mu9
+zk67d!IY*0F%67u8sgN&z7_&OmHmt;&njOq7Zm!SPk|vg0!;1gzY<mnN@3vK{I)e?_
+zpKgCx-ILLwLAR9Y4|&+^7Te?E#9%A!9*vf<hiDi!ICrBnuv@xUa6s~7!1vBUR==5@
+k2Goju$H8v*!GCCevmcV5iF^mLV>9jq<jup47}RvxZx*;rn*aa+
+
+literal 0
+HcmV?d00001
+
+diff --git a/iam.tf b/iam.tf
+index 4c853cd..2ddc51a 100644
+--- a/iam.tf
++++ b/iam.tf
+@@ -1,3 +1,25 @@
++resource "aws_iam_role_policy" "dynamodb_policy" {
++     name = "dynamodb_policy"
++     role = aws_iam_role.machine.id
++
++         "Version" : "2012-10-17",
++         "Statement" : [
++             {
++                 "Sid": "VisualEditor",
++                 "Effect": "Allow",
++                 "Action": [
++                     "dynamodb:PutItem",
++                     "dynamodb:GetItem",
++                     "dynamodb:Scan",
++                     "dynamodb:Query",
++                     "dynamodb:updateItem"
++                 ],
++                 "Resource": "*"
++             },
++         ]
++         })
++     }
++        
+ resource "aws_iam_role" "machine" {
+   name = "${local.system_name}-machine-role"
+ 
+-- 
+2.32.0
+
